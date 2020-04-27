@@ -4,57 +4,55 @@ services:
   # Frontend
   web:
     image: jitsi/web
+    restart: always
     ports:
       - '8000:80'
       - '8443:443'
-    volumes:
-      - jitsimeet_web_web:/config
     env_file:
       - ./settings.env
     networks:
-      - jitsi
+      - meet.jitsi
 
   # XMPP server
   prosody:
     image: jitsi/prosody
+    restart: always
     expose:
       - '5222'
       - '5347'
       - '5280'
-    volumes:
-      - jitsimeet_prosody:/config
     env_file:
       - ./settings.env
     networks:
-      - jitsi
+      - meet.jitsi
+          aliases:
+            - xmpp.meet.jitsi
 
   # Focus component
   jicofo:
     image: jitsi/jicofo
-    volumes:
-      - jitsimeet_jicofo:/config
+    restart: always
     env_file:
       - ./settings.env
     depends_on:
       - prosody
     networks:
-      - jitsi
+      - meet.jitsi
 
   # Video bridge
   jvb:
     image: jitsi/jvb
+    restart: always
     ports:
       - '10000:10000/udp'
       - '4443:4443'
-    volumes:
-      - jitsimeet_jvb:/config
     env_file:
       - ./settings.env
     depends_on:
       - prosody
     networks:
-      - jitsi
+      meet.jitsi:
 
 # Custom network so all services can communicate using a FQDN
 networks:
-    jitsimeet:
+    meet.jitsi:
