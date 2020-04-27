@@ -25,8 +25,8 @@ services:
       - ./settings.env
     networks:
       - meet.jitsi
-          aliases:
-            - xmpp.meet.jitsi
+    aliases:
+      - xmpp.meet.jitsi
 
   # Focus component
   jicofo:
