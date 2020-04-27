@@ -49,6 +49,8 @@ services:
       - '${JVB_TCP_PORT}:${JVB_TCP_PORT}'
     volumes:
       - jitsimeet_jvb:/config
+    env_file:
+      - ./settings.env
     depends_on:
       - prosody
     networks:
