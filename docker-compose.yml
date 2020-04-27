@@ -11,7 +11,7 @@ services:
     env_file:
       - ./settings.env
     networks:
-      - meet.jitsi
+      meet.jitsi:
 
   # XMPP server
   prosody:
@@ -24,9 +24,9 @@ services:
     env_file:
       - ./settings.env
     networks:
-      - meet.jitsi
-    aliases:
-      - xmpp.meet.jitsi
+      meet.jitsi:
+        aliases:
+          - xmpp.meet.jitsi
 
   # Focus component
   jicofo:
@@ -37,7 +37,7 @@ services:
     depends_on:
       - prosody
     networks:
-      - meet.jitsi
+      meet.jitsi:
 
   # Video bridge
   jvb:
