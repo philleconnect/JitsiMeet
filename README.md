@@ -1,3 +1,5 @@
+__Archived: Not actively maintained anymore!__
+
 # JitsiMeet
 Jitsi Meet Video-Conference and Video-Call Docker Containers
 
